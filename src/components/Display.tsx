@@ -3,11 +3,17 @@ import { userStore } from "./store";
 
 const Display = () => {
   const store = userStore();
-  console.log(store.items);
-  const [text, setText] = useState<string>();
+  const [text, setText] = useState<string>("");
   return (
     <div className="flex items-center justify-center mt-20 flex-col ">
-      <div>Items: </div>
+      <div className="flex flex-col">
+        Items:
+        <div>
+          {store.itemArray.map((item) => (
+            <h1 key={item}>{item}</h1>
+          ))}
+        </div>{" "}
+      </div>
       <div className="space-x-2">
         <input
           placeholder="Add data here. "
@@ -20,6 +26,7 @@ const Display = () => {
         <button
           onClick={() => {
             store.setItems(text);
+            setText("");
           }}
           className="border-black px-3 py-1 border rounded hover:text-white hover:bg-black transition-all ease-in "
         >

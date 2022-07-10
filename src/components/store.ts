@@ -1,13 +1,19 @@
 import create from "zustand";
 
-type Store = {
-  items: string[];
+type ItemStore = {
+  itemArray: string[];
+  item: string;
   setItems: (text: string) => void;
 };
 
-export const userStore = create<Store>((set) => ({
-  items: [],
+const addText = (text: string, list: string[]) => [...list, text];
+
+export const userStore = create<ItemStore>((set) => ({
+  item: "",
   setItems: (text: string) => {
-    set((state) => [...state.items, text]);
+    set((state) => ({
+      itemArray: addText(text, state.itemArray),
+    }));
   },
+  itemArray: [],
 }));
